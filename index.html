@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - To-Do List Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>📝 TaskMaster</h1>
+                <button id="themeToggle" class="theme-toggle" title="Toggle Dark Mode">
+                    🌙
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        class="task-input" 
+                        placeholder="Add a new task..."
+                        autocomplete="off"
+                    >
+                    <button id="addBtn" class="add-btn">+ Add Task</button>
+                </div>
+
+                <!-- Task Details -->
+                <div class="task-details">
+                    <div class="detail-group">
+                        <label for="categorySelect">Category:</label>
+                        <select id="categorySelect" class="category-select">
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="detail-group">
+                        <label for="prioritySelect">Priority:</label>
+                        <select id="prioritySelect" class="priority-select">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+
+                    <div class="detail-group">
+                        <label for="dueDateInput">Due Date:</label>
+                        <input type="date" id="dueDateInput" class="due-date-input">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Section -->
+            <section class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+
+                <div class="sort-search">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search tasks..."
+                        autocomplete="off"
+                    >
+                    <select id="sortSelect" class="sort-select">
+                        <option value="date-added">Date Added</option>
+                        <option value="priority">Priority</option>
+                        <option value="due-date">Due Date</option>
+                        <option value="alphabetical">Alphabetical</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Category Filter -->
+            <div class="category-filter">
+                <button class="category-tag active" data-category="all">All Categories</button>
+                <button class="category-tag" data-category="work">Work</button>
+                <button class="category-tag" data-category="personal">Personal</button>
+                <button class="category-tag" data-category="shopping">Shopping</button>
+                <button class="category-tag" data-category="health">Health</button>
+                <button class="category-tag" data-category="other">Other</button>
+            </div>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat">
+                    <span class="stat-label">Total Tasks:</span>
+                    <span class="stat-value" id="totalTasks">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Completed:</span>
+                    <span class="stat-value" id="completedTasks">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Pending:</span>
+                    <span class="stat-value" id="pendingTasks">0</span>
+                </div>
+            </section>
+
+            <!-- Tasks List -->
+            <section class="tasks-section">
+                <ul id="tasksList" class="tasks-list"></ul>
+                <div id="emptyState" class="empty-state">
+                    <p>📭 No tasks found. Create one to get started!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <button id="clearCompletedBtn" class="clear-btn">Clear Completed Tasks</button>
+            <button id="exportBtn" class="export-btn">📥 Export Tasks</button>
+        </footer>
+    </div>
+
+    <!-- Modal for Edit Task -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Task</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="editTaskInput" class="task-input" placeholder="Task description">
+                <div class="task-details">
+                    <div class="detail-group">
+                        <label for="editCategory">Category:</label>
+                        <select id="editCategory" class="category-select">
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="detail-group">
+                        <label for="editPriority">Priority:</label>
+                        <select id="editPriority" class="priority-select">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="detail-group">
+                        <label for="editDueDate">Due Date:</label>
+                        <input type="date" id="editDueDate" class="due-date-input">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelEditBtn" class="cancel-btn">Cancel</button>
+                <button id="saveEditBtn" class="save-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
